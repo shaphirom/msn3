@@ -1,0 +1,10 @@
+
+
+activar flask
+activar el modo desarrollo
+
+..\venv\Scripts\activate
+set FLASK_APP=go.py
+set FLASK_ENV=development
+cls
+
