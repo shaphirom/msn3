@@ -1,14 +1,26 @@
 from flask_wtf import FlaskForm
 
-from wtforms import StringField, EmailField, InputField, TextAreaField
-from wtforms.validators import DataRequired, Email
+from wtforms import StringField, PasswordField, TextAreaField, SubmitField, ValidationError
+from wtforms.validators import DataRequired, Email, EqualTo
+from models import User
 
-class UsuarioForm(FlaskForm):
+class RegistroForm(FlaskForm):
     nombre = StringField('Nombre', validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    password = StringField("Contraseña", validators=[DataRequired()])
-    password_validate = StringField("Contraseña", validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField("Contraseña", validators=[DataRequired(), EqualTo('password2', message = 'Las contraseñas deben coincidir')])
+    password2 = PasswordField('Confirme Contraseña', validators=[DataRequired()])
+    submit = SubmitField('Registrar')
 
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('Email en uso')
 
-class MensajeForm(FlaskForm):
-    mensaje = TextAreaField("Mensaje")
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
+    submit = SubmitField('Ingrasar')
+
+class AddMensaje(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    mensaje =  TextAreaField('Mensaje', validators=[DataRequired()])
+    submit = SubmitField("Agregar")
