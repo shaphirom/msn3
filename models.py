@@ -10,7 +10,7 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__= 'user'
     id = db.Column(db.Integer, primary_key= True)
-    nombre = db.Column(db.String(50), nullable = False)
+    name = db.Column(db.String(50), nullable = False)
     email = db.Column(db.String(50), nullable = False, unique=True)
     password_hash = db.Column(db.String(30), nullable = False)
     message = db.relationship('Message', backref=db.backref('user'), lazy='dynamic')

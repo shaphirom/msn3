@@ -21,6 +21,5 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Ingrasar')
 
 class AddMensaje(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
     mensaje =  TextAreaField('Mensaje', validators=[DataRequired()])
     submit = SubmitField("Agregar")
