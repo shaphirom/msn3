@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+	Añadir Mensaje {{super()}}
+{% endblock %}
+
+{% block page_content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1>Agregar Nuevos Mensajes</h1>
+				{{wtf.quick_form(form)}}
+			</div>
+		</div>
+	</div>
+{% endblock %}

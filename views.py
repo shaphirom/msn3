@@ -14,7 +14,11 @@ def register():
     form = RegistroForm()
 
     if form.validate_on_submit():
-        user = User(name = form.nombre.data,email=form.email.data, password=form.password.data)
+        form.validate_email(form.email)
+        print(form.nombre.data)
+        print(form.email.data)
+        print(form.password.data)
+        user = User(name = form.nombre.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Tu cuenta ha sido creada.')
@@ -30,7 +34,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
-            login_user(user, True)
+            login_user(user, remember=True)
 
             return redirect(url_for('get_mensajes'))
         flash('Email o Password Incorrectos')
@@ -65,7 +69,7 @@ def get_mensajes():
     return render_template('mensajes.html', mensajes=mensajes)
 
 
-@app.route('add_mensaje', methods=['GET','POST'])
+@app.route('/add_mensaje', methods=['GET','POST'])
 @login_required
 def add_mensaje():
     form = AddMensaje()

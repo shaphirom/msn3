@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = '123456789'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///%s' % join(basedir,'msn3.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-bootstrap = Bootstrap(app)
+Bootstrap(app)
 
 db.init_app(app)
 

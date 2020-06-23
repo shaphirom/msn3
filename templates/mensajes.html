@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Leer mensaje {{super()}}
+{% endblock %}
+
+{% block page_content %}
+	Tus mensajes estan aqui
+	{% for msn in mensajes %}
+		<div>	
+			{{msn.id}}
+			{{msn.user.name}}
+			{{msn.message}}
+			{{msn.f_sub}}
+			{{msn.f_mod}}
+		</div>
+	{% endfor %}
+{% endblock %}
